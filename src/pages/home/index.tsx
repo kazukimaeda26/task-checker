@@ -3,7 +3,8 @@ import { Header } from '../../components/header';
 import { Select } from '../../components/select';
 import { ToDoList } from '../../components/toDoList';
 import { FormModal } from "../../components/modal";
-import { taskRequest } from "../../requests/taskRequest"
+import { taskRequest } from "../../requests/taskRequest";
+import { genreRequest } from "../../requests/genreRequest";
 import './style.css';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
@@ -17,11 +18,16 @@ export const Home = () => {
   }
 
   useEffect(()=> {
+    const showGenres = async () => {
+      const response = await genreRequest('fetchGenres');
+      console.log(response);
+    }
     const showTasks = async () => {
       const response = await taskRequest('fetchTasks');
       console.log(response);
     }
-    showTasks()
+    showGenres();
+    showTasks();
   }, [])
   return(
     <div className="main">
